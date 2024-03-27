@@ -9,5 +9,3 @@ RUN apk add --no-cache bash\
     && docker-php-ext-install pdo_pgsql
 
 WORKDIR /app
-
-EXPOSE 9000
