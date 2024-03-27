@@ -6,4 +6,7 @@ composer install -o -a --apcu-autoloader --no-dev && php artisan optimize
 echo Running migration
 php artisan migrate --seed
 
-# chown -R www-data:www-data storage
+echo Generate a key application
+php artisan key:generate
+
+chown -R www-data:www-data storage

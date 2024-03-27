@@ -10,8 +10,4 @@ RUN apk add --no-cache bash\
 
 WORKDIR /app
 
-COPY /.docker/php/run.sh .
-
-RUN chmod +x run.sh
-
-EXPOSE 8000
+EXPOSE 9000

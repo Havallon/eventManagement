@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    env_file:
+      - path: ./.docker/db/.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./.docker/db/postgresql.conf:/docker-entrypoint-initdb.d/postgresql.conf
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - service_net
+  api:
+    build:
+      context: ./.docker/php/
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/app
+      - ./.docker/php/run.sh:/app/run.sh
+    tty: true
+    ports:
+      - "9000:9000"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - service_net
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - ./src:/app
+      - ./.docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - api
+    ports:
+      - "80:80"
+    networks:
+      - service_net
+
+networks:
+    service_net:
+      driver: bridge
