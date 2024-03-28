@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Hash;
+use App\Traits\Uuid;
+use App\Enums\UserRole;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, Uuid;
 
     /**
      * The attributes that are mass assignable.
@@ -20,7 +23,10 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'document',
+        'phone_number',
         'password',
+        'role'
     ];
 
     /**
@@ -33,13 +39,16 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = Hash::make($password);
+    }
     /**
      * The attributes that should be cast.
      *
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
+        'role' => UserRole::class,
     ];
 }
