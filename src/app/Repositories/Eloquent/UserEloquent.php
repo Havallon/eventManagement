@@ -20,7 +20,7 @@ class UserEloquent implements UserRepositoryInterface
     }
     public function getById(string $id): User
     {
-        $user = $this->user->find($id);
+        $user = $this->user->findOrFail($id);
         return (object) $user;
     }
     public function create(CreateUserDTO $dto): User
@@ -30,13 +30,13 @@ class UserEloquent implements UserRepositoryInterface
     }
     public function update(UpdateUserDTO $dto): User
     {
-        $user = $this->user->find($dto->id);
+        $user = $this->user->findOrFail($dto->id);
         $user->update((array) $dto);
         return (object) $user;
     }
     public function delete(string $id): User
     {
-        $user = $this->user->find($id);
+        $user = $this->user->findOrFail($id);
         $user->delete();
         return  (object) $user;
     }
