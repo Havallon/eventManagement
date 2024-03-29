@@ -1,0 +1,302 @@
+{
+	"info": {
+		"_postman_id": "29ed8538-ba86-438a-aade-4a301c567001",
+		"name": "Event Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1828309"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "List users",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|Qt76tXQFtdHVsqPtfQrpX9lZJlqQ7q6Pw7Yz0WyI0321cbf7",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost/api/users",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|VBaOCFyZfUIeYLoHSdcV0Ads12wsdx9QtS0vPBBB6e6a0f25",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost/api/users/3d02bf0c-f752-4397-be49-2f1e5f9e447d",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"users",
+								"3d02bf0c-f752-4397-be49-2f1e5f9e447d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user Copy",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"alterado\",\r\n    \"phone_number\": \"75 99999-9999\",\r\n    \"role\": \"Producer\",\r\n    \"email\": \"producer@admin.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/api/users/45914d9a-36b4-4a10-bf7b-6e8a5c1ee41a",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"users",
+								"45914d9a-36b4-4a10-bf7b-6e8a5c1ee41a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"alterado\",\r\n    \"phone_number\": \"75 99999-9999\",\r\n    \"role\": \"Producer\",\r\n    \"email\": \"producer@admin.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/api/users/45914d9a-36b4-4a10-bf7b-6e8a5c1ee41a",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"users",
+								"45914d9a-36b4-4a10-bf7b-6e8a5c1ee41a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create users",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Teste\",\r\n    \"document\": \"000.000.000-22\",\r\n    \"password\": \"102030\",\r\n    \"phone_number\": \"75 99999-9999\",\r\n    \"role\": \"Producer\",\r\n    \"email\": \"producerteste@admin.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/api/users",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@admin.com\",\r\n    \"password\": \"102030\",\r\n    \"device_name\": \"postman\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/api/login",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "8|FVFHrLQ4N8t2qtqB6Is9y3MjiCITo2oAX7vBhdRsf8e62447",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost/api/logout",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
