@@ -22,5 +22,23 @@ class UserSeeder extends Seeder
             "password"=> "102030",
             "role"=> UserRole::admin
         ]);
+
+        User::create([
+            "name"=> "producer",
+            "email"=> "producer@producer.com",
+            "document" => "000.000.000-01",
+            "phone_number" => "75999999999",
+            "password"=> "102030",
+            "role"=> UserRole::producer
+        ]);
+
+        User::create([
+            "name"=> "customer",
+            "email"=> "customer@customer.com",
+            "document" => "000.000.000-02",
+            "phone_number" => "75999999999",
+            "password"=> "102030",
+            "role"=> UserRole::customer
+        ]);
     }
 }

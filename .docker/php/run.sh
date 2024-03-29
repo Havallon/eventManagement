@@ -8,8 +8,9 @@ echo Running migration
 php artisan migrate:fresh --seed
 
 echo Generate a key application
-php artisan cache:clear
 php artisan key:generate
-php artisan config:cache
+
+echo Caching
+php artisan optimize
 
 chown -R www-data:www-data storage
