@@ -1,9 +1,10 @@
 #!/bin/bash
 
 echo Installing dependecies from project...
-composer install -o -a --apcu-autoloader --no-dev && php artisan optimize
+composer install -o -a --apcu-autoloader --no-dev
 composer  dump-autoload
 
+php artisan optimize:clear
 echo Running migration
 php artisan migrate:fresh --seed
 
