@@ -12,6 +12,6 @@ interface EventRepositoryInterface
     public function getById(string $id): Event;
     public function getAllByUser(string $userId): Collection;
     public function create(CreateEventDTO $dto): Event;
-    public function update(UpdateEventDTO $dto): Event;
-    public function delete(string $id): Event;
+    public function update(UpdateEventDTO $dto, string $userId): Event;
+    public function delete(string $id, string $userId): Event;
 }

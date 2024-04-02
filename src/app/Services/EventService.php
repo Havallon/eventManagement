@@ -5,9 +5,12 @@ use App\DTO\Event\CreateEventDTO;
 use App\DTO\Event\UpdateEventDTO;
 use App\Enums\UserRole;
 use App\Models\Event;
+use App\Models\User;
 use App\Repositories\Interfaces\EventRepositoryInterface;
+use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class EventService
 {
@@ -18,27 +21,54 @@ class EventService
     public function getAll(Request $request): Collection
     {
         $user = $request->user();
-        if ($user->role === UserRole::admin)
+        if ($this->isAdmin($user))
         {
             return $this->repository->getAll();
         }
         return $this->repository->getAllByUser($user->id);
     }
-    public function getById(string $id): Event
+    public function getById(Request $request, string $id): Event
     {
-        return $this->repository->getById($id);
+        $event = $this->repository->getById($id);
+        $user = $request->user();
+        if ($this->isAdmin($user))
+        {
+            return $event;
+        }
+        if ($event->user_id != $user->id)
+        {
+            throw new AccessDeniedHttpException("Access Denied");
+        }
+        return $event;
+        
     }
     public function create(Request $request): Event
     {
-        return $this->repository->create(CreateEventDTO::makeDTO($request, 'teste/teste'));
+        $user = $request->user();
+        if ($user->role == UserRole::admin || $user->role == UserRole::producer){
+            return $this->repository->create(CreateEventDTO::makeDTO($request, 'teste/teste'));
+        }
+        throw new AccessDeniedHttpException('Access Denied');
     }
     public function update(Request $request, $id): Event
     {
-        return $this->repository->update(UpdateEventDTO::makeDTO($request, $id));
+        $user = $request->user();
+        if ($this->isAdmin( $user))
+        {
+           return $this->repository->update(UpdateEventDTO::makeDTO($request, $id), $user->id);
+        }
     }
-    public function delete(string $id): Event
+    public function delete(Request $request, string $id): Event
     {
-        return $this->repository->delete($id);
+        $user = $request->user();
+        if ($this->isAdmin( $user))
+        {
+           return $this->repository->delete($id, $user->id);
+        }
     }
 
+    private function isAdmin(User $user): bool
+    {
+        return $user->role === UserRole::admin;
+    }
 }

@@ -6,6 +6,7 @@ use App\DTO\Event\UpdateEventDTO;
 use App\Repositories\Interfaces\EventRepositoryInterface;
 use App\Models\Event;
 use Illuminate\Database\Eloquent\Collection;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class EventEloquent implements EventRepositoryInterface
 {
@@ -31,15 +32,23 @@ class EventEloquent implements EventRepositoryInterface
         $event = $this->event->create((array) $dto);
         return (object) $event;
     }
-    public function update(UpdateEventDTO $dto): Event
+    public function update(UpdateEventDTO $dto, string $userId): Event
     {
         $event = $this->event->findOrFail($dto->id);
+        if ($event->user_id !== $userId)
+        {
+            throw new AccessDeniedHttpException('Access Denied');
+        }
         $event->update($this->removeNullElement((array) $dto));
         return (object) $event;
     }
-    public function delete(string $id): Event
+    public function delete(string $id, string $userId): Event
     {
         $event = $this->event->findOrFail($id);
+        if ($event->user_id !== $userId)
+        {
+            throw new AccessDeniedHttpException('Access Denied');
+        }
         $event->delete();
         return (object) $event;
     }

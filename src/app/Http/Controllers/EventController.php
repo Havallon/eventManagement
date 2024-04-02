@@ -37,7 +37,7 @@ class EventController extends Controller
      */
     public function show(Request $request, string $id)
     {
-        $event = $this->service->getById($id);
+        $event = $this->service->getById($request, $id);
         return new EventResource($event);
     }
 
@@ -53,9 +53,9 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
-        $event = $this->service->delete($id);
+        $event = $this->service->delete($request, $id);
         return (new EventResource($event));
     }
 }
