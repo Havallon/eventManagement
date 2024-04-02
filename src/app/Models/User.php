@@ -4,12 +4,14 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Hash;
 use App\Traits\Uuid;
 use App\Enums\UserRole;
+use App\Models\Event;
 
 class User extends Authenticatable
 {
@@ -51,4 +53,9 @@ class User extends Authenticatable
     protected $casts = [
         'role' => UserRole::class,
     ];
+
+    public function events(): HasMany
+    {
+        return $this->hasMany(Event::class);
+    }
 }

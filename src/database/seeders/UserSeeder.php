@@ -33,6 +33,15 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
+            "name"=> "producer",
+            "email"=> "producer_2@producer.com",
+            "document" => "000.000.000-11",
+            "phone_number" => "75999999999",
+            "password"=> "102030",
+            "role"=> UserRole::producer
+        ]);
+
+        User::create([
             "name"=> "customer",
             "email"=> "customer@customer.com",
             "document" => "000.000.000-02",
