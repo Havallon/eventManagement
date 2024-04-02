@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\DTO\User\CreateUserDTO;
-use App\DTO\User\UpdateUserDTO;
 use App\Http\Resources\UserResource;
 use App\Services\UserService;
 use Illuminate\Http\Request;
@@ -28,7 +26,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = $this->service->create(CreateUserDTO::makeFromRequest($request));
+        $user = $this->service->create($request);
         return (new UserResource($user))
         ->response()
         ->setStatusCode(Response::HTTP_CREATED);
@@ -48,7 +46,7 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $user = $this->service->update(UpdateUserDTO::makeFromRequest($request, $id));
+        $user = $this->service->update($request, $id);
         return (new UserResource($user));
     }
 

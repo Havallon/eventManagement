@@ -7,6 +7,7 @@ use App\DTO\User\UpdateUserDTO;
 use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 
 class UserService
 {
@@ -23,13 +24,13 @@ class UserService
     {
         return $this->repository->getById($id);
     }
-    public function create(CreateUserDTO $dto): User
+    public function create(Request $request): User
     {
-        return $this->repository->create($dto);
+        return $this->repository->create(CreateUserDTO::makeFromRequest($request));
     }
-    public function update(UpdateUserDTO $dto): User
+    public function update(Request $request, string $id): User
     {
-        return $this->repository->update($dto);
+        return $this->repository->update(UpdateUserDTO::makeFromRequest($request, $id));
     }
     public function delete(string $id): User
     {
