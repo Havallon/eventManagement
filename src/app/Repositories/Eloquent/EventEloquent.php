@@ -32,23 +32,15 @@ class EventEloquent implements EventRepositoryInterface
         $event = $this->event->create((array) $dto);
         return (object) $event;
     }
-    public function update(UpdateEventDTO $dto, string $userId): Event
+    public function update(UpdateEventDTO $dto): Event
     {
         $event = $this->event->findOrFail($dto->id);
-        if ($event->user_id !== $userId)
-        {
-            throw new AccessDeniedHttpException('Access Denied');
-        }
         $event->update($this->removeNullElement((array) $dto));
         return (object) $event;
     }
-    public function delete(string $id, string $userId): Event
+    public function delete(string $id): Event
     {
         $event = $this->event->findOrFail($id);
-        if ($event->user_id !== $userId)
-        {
-            throw new AccessDeniedHttpException('Access Denied');
-        }
         $event->delete();
         return (object) $event;
     }

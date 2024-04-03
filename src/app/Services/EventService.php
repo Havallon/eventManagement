@@ -53,18 +53,22 @@ class EventService
     public function update(Request $request, $id): Event
     {
         $user = $request->user();
-        if ($this->isAdmin( $user))
+        $event = $this->repository->getById($id);
+        if ($this->isAdmin( $user) || $event->user_id != $user->id)
         {
-           return $this->repository->update(UpdateEventDTO::makeDTO($request, $id), $user->id);
+           return $this->repository->update(UpdateEventDTO::makeDTO($request, $id));
         }
+        throw new AccessDeniedHttpException('Access denied');
     }
     public function delete(Request $request, string $id): Event
     {
         $user = $request->user();
-        if ($this->isAdmin( $user))
+        $event = $this->repository->getById($id);
+        if ($this->isAdmin( $user) || $event->user_id != $user->id)
         {
-           return $this->repository->delete($id, $user->id);
+           return $this->repository->delete($id);
         }
+        throw new AccessDeniedHttpException('Access denied'); 
     }
 
     private function isAdmin(User $user): bool
