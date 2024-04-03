@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\EventResource;
-use App\Services\EventService;
+use App\Http\Resources\SectionResource;
+use App\Services\SectionService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class EventController extends Controller
+class SectionController extends Controller
 {
     public function __construct(
-        protected EventService $service
+        protected SectionService $service
     ){}
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $events = $this->service->getAll($request);
-        return EventResource::collection($events);
+        $sections = $this->service->getAll($request);
+        return SectionResource::collection($sections);
     }
 
     /**
@@ -26,8 +26,8 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        $event = $this->service->create($request);
-        return (new EventResource($event))
+        $section = $this->service->create($request);
+        return (new SectionResource($section))
         ->response()
         ->setStatusCode(Response::HTTP_CREATED);
     }
@@ -37,8 +37,8 @@ class EventController extends Controller
      */
     public function show(Request $request, string $id)
     {
-        $event = $this->service->getById($request, $id);
-        return new EventResource($event);
+        $section = $this->service->getById($request, $id);
+        return (new SectionResource($section));
     }
 
     /**
@@ -46,8 +46,8 @@ class EventController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $event = $this->service->update($request, $id);
-        return (new EventResource($event));
+        $section = $this->service->update($request, $id);
+        return (new SectionResource($section));
     }
 
     /**
@@ -55,7 +55,7 @@ class EventController extends Controller
      */
     public function destroy(Request $request, string $id)
     {
-        $event = $this->service->delete($request, $id);
-        return (new EventResource($event));
+        $section = $this->service->delete($request, $id);
+        return (new SectionResource($section));
     }
 }
