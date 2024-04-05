@@ -5,10 +5,12 @@ namespace App\Providers;
 use App\Repositories\Eloquent\BatchEloquent;
 use App\Repositories\Eloquent\EventEloquent;
 use App\Repositories\Eloquent\SectionEloquent;
+use App\Repositories\Eloquent\TicketEloquent;
 use App\Repositories\Eloquent\UserEloquent;
 use App\Repositories\Interfaces\BatchRepositoryInterface;
 use App\Repositories\Interfaces\EventRepositoryInterface;
 use App\Repositories\Interfaces\SectionRepositoryInterface;
+use App\Repositories\Interfaces\TicketsRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
@@ -23,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(EventRepositoryInterface::class, EventEloquent::class);
         $this->app->bind(SectionRepositoryInterface::class, SectionEloquent::class);
         $this->app->bind(BatchRepositoryInterface::class, BatchEloquent::class);
+        $this->app->bind(TicketsRepositoryInterface::class, TicketEloquent::class);
     }
 
     /**

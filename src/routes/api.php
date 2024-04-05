@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BatchController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\SectionController;
+use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
@@ -16,3 +17,4 @@ Route::apiResource('users', UserController::class)->except(['store'])->middlewar
 Route::apiResource('events', EventController::class)->middleware('auth:sanctum');
 Route::apiResource('sections', SectionController::class)->middleware('auth:sanctum');
 Route::apiResource('batches', BatchController::class)->middleware('auth:sanctum');
+Route::apiResource('tickets', TicketController::class)->middleware('auth:sanctum');
